@@ -1,5 +1,6 @@
 export interface Transactions {
-  id: string;
+  id: Number;
+  _id: string;
   date: string;
   sender: {
     firstName: string;
