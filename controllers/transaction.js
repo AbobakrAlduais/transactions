@@ -6,8 +6,8 @@ const getTransactions = async (req, res) => {
     const transactions = await Transaction.find({
       date: { $gte: +startDate, $lte: +endDate },
     })
+      .select('_id id date Comments')
       .sort('date')
-      .populate('sender')
       .exec();
     return res.status(200).json(transactions);
   } catch (error) {
@@ -18,7 +18,7 @@ const getTransactions = async (req, res) => {
 const getTransactionById = async (req, res) => {
   const { id } = req.params;
   try {
-    const doc = await Transaction.findById(id);
+    const doc = await Transaction.findById(id, '_id id date Comments');
     return res.status(200).json(doc);
   } catch (error) {
     return res.status(500).json(error);
