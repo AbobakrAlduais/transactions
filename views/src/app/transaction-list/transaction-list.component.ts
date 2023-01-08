@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { TransactionService } from '../transaction.service';
-import { Transactions } from '../transactions';
+import { Transaction } from '../transaction';
 
 @Component({
   selector: 'app-transaction-list',
@@ -10,7 +10,7 @@ import { Transactions } from '../transactions';
 })
 export class TransactionListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'date', 'comments', 'action'];
-  transactions: Transactions[] = [];
+  transactions: Transaction[] = [];
   endDate = new Date();
   startDate = new Date(new Date().setDate(this.endDate.getDate() - 7));
   dateForm: FormGroup;

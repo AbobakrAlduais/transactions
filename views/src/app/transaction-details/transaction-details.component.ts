@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {FormGroup, FormControl, Validators } from '@angular/forms';
 import { TransactionService } from '../transaction.service';
-import { Transactions } from '../transactions';
+import { Transaction } from '../transaction';
 
 @Component({
   selector: 'app-transaction-details',
@@ -11,7 +11,7 @@ import { Transactions } from '../transactions';
 })
 export class TransactionDetailsComponent implements OnInit {
   id: any;
-  transaction: Transactions = {
+  transaction: Transaction = {
     id: 0,
     _id: '',
     date: '',
