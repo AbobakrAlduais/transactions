@@ -7,6 +7,10 @@ const {
 const Schema = mongoose.Schema;
 const transactionSchema = new Schema(
   {
+    id: {
+      type: Number,
+      unique: true
+    },
     sender: {
       type: Schema.Types.ObjectId,
       ref: 'User',
@@ -24,6 +28,7 @@ const transactionSchema = new Schema(
     },
     Amount: {
       type: mongoose.Types.Decimal128,
+      required: true,
       get: (value) => value.toString(),
     },
     CurrencyCd: {

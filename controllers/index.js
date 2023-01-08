@@ -1,5 +1,6 @@
-const { getTransactions } = require('./transaction');
+const { getTransactions, getTransactionById } = require('./transaction');
 
 module.exports = {
   getTransactions,
+  getTransactionById,
 };

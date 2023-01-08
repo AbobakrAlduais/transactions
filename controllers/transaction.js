@@ -4,7 +4,7 @@ const getTransactions = async (req, res) => {
   try {
     const { startDate, endDate } = req.query;
     const transactions = await Transaction.find({
-      date: { $gte: +startDate, $lt: +endDate },
+      date: { $gte: +startDate, $lte: +endDate },
     })
       .sort('date')
       .populate('sender')
@@ -15,6 +15,17 @@ const getTransactions = async (req, res) => {
   }
 };
 
+const getTransactionById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const doc = await Transaction.findById(id);
+    return res.status(200).json(doc);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+
 module.exports = {
   getTransactions,
+  getTransactionById,
 };
