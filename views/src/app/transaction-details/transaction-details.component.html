@@ -1,1 +1,29 @@
-<p>transaction-details works!</p>
+<form class="form-container" [formGroup]="transactionForm">
+  <div class="row">
+
+    <div class="col-md-6 top-padding">
+      <mat-form-field class="full-width">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="id" [value]="transaction.id" readonly>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6 top-padding">
+      <mat-form-field class="full-width">
+        <mat-label>Date</mat-label>
+        <input matInput [value]="transaction.date | date: 'dd/MM/yyyy'" formControlName="date">
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6 top-padding">
+      <mat-form-field class="full-width">
+        <mat-label>Comments </mat-label>
+        <textarea matInput [value]="transaction.Comments" formControlName="comments" required></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+</form>
+
+<div class="button-container">
+  <a mat-raised-button [routerLink]="['/']">Back To List</a>
+</div>

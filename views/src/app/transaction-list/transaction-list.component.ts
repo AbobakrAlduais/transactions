@@ -4,7 +4,7 @@ import { TransactionService } from '../transaction.service';
 import { Transactions } from '../transactions';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-transaction-list',
   templateUrl: './transaction-list.component.html',
   styleUrls: ['./transaction-list.component.css'],
 })
@@ -23,17 +23,16 @@ export class TransactionListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getTransaction(this.startDate, this.endDate);
+    this.getTransactions(this.startDate, this.endDate);
   }
 
   dateRangeChange(startDate: string, endDate: string): void {
-    console.log(startDate, endDate, typeof startDate);
     if (endDate) {
-      this.getTransaction(startDate, endDate);
+      this.getTransactions(startDate, endDate);
     }
   }
 
-  getTransaction(start: string | Date, end: string | Date): void {
+  getTransactions(start: string | Date, end: string | Date): void {
     const startDate = new Date(start).getTime();
     const endDate = new Date(end).getTime();
     const path = `transaction?startDate=${startDate}&endDate=${endDate}`;

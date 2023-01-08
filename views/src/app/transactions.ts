@@ -2,13 +2,13 @@ export interface Transactions {
   id: Number;
   _id: string;
   date: string;
-  sender: {
+  sender?: {
     firstName: string;
     lastName: string;
     dateOfBirth: string;
     IDNumber: string;
   };
-  recipient: {
+  recipient?: {
     firstName: string;
     lastName: string;
     email: string;
@@ -17,6 +17,6 @@ export interface Transactions {
   };
   Amount: string;
   CurrencyCd: string;
-  Comments: string;
+  Comments?: string;
   status: string;
 }

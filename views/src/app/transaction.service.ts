@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from './../environments/environment';
 import { Transactions } from './transactions';
 
@@ -14,5 +14,9 @@ export class TransactionService {
 
   getTransactions<T>(path: string): Observable<Transactions[]> {
     return this.http.get<Transactions[]>(`${this.baseUrl}/${path}`);
+  }
+
+  getTransactionById<T>(path: string): Observable<Transactions> {
+    return this.http.get<Transactions>(`${this.baseUrl}/${path}`);
   }
 }
