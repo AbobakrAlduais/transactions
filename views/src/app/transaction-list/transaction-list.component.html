@@ -1,3 +1,6 @@
+<div class="container">
+<div class="filter-container">
+  <!-- Time filter -->
 <form [formGroup]="dateForm">
   <mat-form-field appearance="fill">
     <mat-label>Enter a date range</mat-label>
@@ -12,8 +15,17 @@
   </mat-form-field>
 </form>
 
-<table mat-table [dataSource]="transactions" class="mat-elevation-z8">
+<!-- Status filter -->
+<mat-form-field>
+  <mat-label>Filter By Status</mat-label>
+  <mat-select multiple #multiSelect [(ngModel)]="currentStatus" (selectionChange)="statusChange(multiSelect.value)" >
+    <mat-option *ngFor="let option of options" [value]="option">{{ option }}</mat-option>
+  </mat-select>
+</mat-form-field>
+</div>
 
+<!-- Table -->
+<table mat-table [dataSource]="transactions" class="mat-elevation-z8">
   <!-- ID Column -->
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef> ID </th>
@@ -43,3 +55,4 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+</div>

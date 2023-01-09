@@ -12,12 +12,12 @@ export class TransactionService {
 
   constructor(private http: HttpClient) {}
 
-  getTransactions<T>(path: string): Observable<Transaction[]> {
-    return this.http.get<Transaction[]>(`${this.baseUrl}/${path}`);
+  getTransactions<T>(query: string): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(`${this.baseUrl}/transaction/${query}`);
   }
 
-  getTransactionById<T>(path: string): Observable<Transaction> {
-    return this.http.get<Transaction>(`${this.baseUrl}/${path}`);
+  getTransactionById<T>(id: string): Observable<Transaction> {
+    return this.http.get<Transaction>(`${this.baseUrl}/transaction/${id}`);
   }
 
   updateComments<T>(id: string, body: object): Observable<Transaction> {

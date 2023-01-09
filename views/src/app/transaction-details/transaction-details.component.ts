@@ -54,9 +54,8 @@ export class TransactionDetailsComponent implements OnInit {
   }
 
   getTransactionById(id: string): void {
-    const path = `transaction/${id}`;
     this.transactionService
-      .getTransactionById(path)
+      .getTransactionById(id)
       .subscribe((transaction) => (this.transaction = transaction));
   }
 

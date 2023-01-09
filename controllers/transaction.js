@@ -2,10 +2,13 @@ const { Transaction } = require('../models');
 
 const getTransactions = async (req, res) => {
   try {
-    const { startDate, endDate } = req.query;
-    const transactions = await Transaction.find({
-      date: { $gte: +startDate, $lte: +endDate },
-    })
+    const { startDate, endDate, status } = req.query;
+    let filter = { date: { $gte: +startDate, $lte: +endDate } };
+    if (status) {
+      filter = { ...filter, ...{ status: { $in: status.split(',') } } };
+    }
+
+    const transactions = await Transaction.find(filter)
       .select('_id id date Comments')
       .sort('date')
       .exec();
