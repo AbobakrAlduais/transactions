@@ -19,7 +19,7 @@
       <mat-form-field class="full-width">
         <mat-label>Comments </mat-label>
         <textarea matInput [value]="transaction.Comments" #comments formControlName="comments"
-          (change)="commentsChange(comments.value)"></textarea>
+          (focusout)="commentsChange(comments.value)"></textarea>
           <mat-error *ngIf="comments.oninvalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
     </div>
