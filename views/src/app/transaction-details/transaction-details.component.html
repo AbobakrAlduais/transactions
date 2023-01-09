@@ -18,7 +18,9 @@
     <div class="col-md-6 top-padding">
       <mat-form-field class="full-width">
         <mat-label>Comments </mat-label>
-        <textarea matInput [value]="transaction.Comments" formControlName="comments" required></textarea>
+        <textarea matInput [value]="transaction.Comments" #comments formControlName="comments"
+          (change)="commentsChange(comments.value)"></textarea>
+          <mat-error *ngIf="comments.oninvalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
     </div>
   </div>

@@ -19,4 +19,11 @@ export class TransactionService {
   getTransactionById<T>(path: string): Observable<Transaction> {
     return this.http.get<Transaction>(`${this.baseUrl}/${path}`);
   }
+
+  updateComments<T>(id: string, body: object): Observable<Transaction> {
+    return this.http.patch<Transaction>(
+      `${this.baseUrl}/transaction/${id}`,
+      body
+    );
+  }
 }

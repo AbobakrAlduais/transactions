@@ -25,7 +25,23 @@ const getTransactionById = async (req, res) => {
   }
 };
 
+const updateComments = async (req, res) => {
+  const { id } = req.params;
+  const { Comments } = req.body;
+  try {
+    const doc = await Transaction.findOneAndUpdate(
+      { _id: id },
+      { Comments },
+      { new: true, projection: { _id: 1, id: 1, Comments: 1, date: 1 } },
+    );
+    return res.status(200).json(doc);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+
 module.exports = {
   getTransactions,
   getTransactionById,
+  updateComments,
 };

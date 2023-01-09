@@ -8,6 +8,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 dbConnect();
 
+app.use(express.json());
 app.use(cors());
 app.use("/transaction", transactionRouter);
 

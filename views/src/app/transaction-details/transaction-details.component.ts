@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TransactionService } from '../transaction.service';
 import { Transaction } from '../transaction';
 
@@ -20,10 +20,15 @@ export class TransactionDetailsComponent implements OnInit {
     status: '',
   };
 
+  comments = new FormControl(this.transaction.Comments, [
+    Validators.required,
+    Validators.pattern('^[a-zA-Z0-9 ]*$'),
+  ]);
+
   transactionForm = new FormGroup({
-    id: new FormControl({value: this.transaction.id, disabled: true}),
-    date: new FormControl({value: this.transaction.date, disabled: true}),
-    comments: new FormControl(this.transaction.Comments, Validators.pattern('^[a-zA-Z0-9]*$')),
+    id: new FormControl({ value: this.transaction.id, disabled: true }),
+    date: new FormControl({ value: this.transaction.date, disabled: true }),
+    comments: this.comments,
   });
 
   constructor(
@@ -38,10 +43,34 @@ export class TransactionDetailsComponent implements OnInit {
     this.getTransactionById(this.id);
   }
 
+  getErrorMessage(): string {
+    if (this.comments.hasError('required')) {
+      return 'You must enter a value';
+    }
+
+    return this.comments.hasError('pattern')
+      ? 'Only alphanumeric characters are allowed'
+      : '';
+  }
+
   getTransactionById(id: string): void {
     const path = `transaction/${id}`;
     this.transactionService
       .getTransactionById(path)
+      .subscribe((transaction) => (this.transaction = transaction));
+  }
+
+  commentsChange(comments: string): void {
+    const isAlphanumeric = /^[a-zA-Z0-9 ]*$/.test(comments);
+
+    if (isAlphanumeric) {
+      this.updateComments(comments);
+    }
+  }
+
+  updateComments(comments: string): void {
+    this.transactionService
+      .updateComments(this.id, { Comments: comments })
       .subscribe((transaction) => (this.transaction = transaction));
   }
 }
